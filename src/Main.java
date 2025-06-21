@@ -4,42 +4,69 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Введите первое число:");
-        double num1 = scanner.nextDouble();
+        System.out.println("Калькулятор. Введите 'выход' в любой момент для завершения.");
 
-        System.out.println("Введите оператор (+, -, *, /):");
-        char operator = scanner.next().charAt(0);
+        while (true) {
+            double num1;
+            double num2;
+            char operator;
 
-        System.out.println("Введите второе число:");
-        double num2 = scanner.nextDouble();
 
-        double result;
+            System.out.print("Введите первое число: ");
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("выход")) break;
+            try {
+                num1 = Double.parseDouble(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите корректное число.");
+                continue;
+            }
 
-        switch (operator) {
-            case '+':
-                result = num1 + num2;
-                System.out.println("Результат: " + result);
-                break;
-            case '-':
-                result = num1 - num2;
-                System.out.println("Результат: " + result);
-                break;
-            case '*':
-                result = num1 * num2;
-                System.out.println("Результат: " + result);
-                break;
-            case '/':
-                if (num2 != 0) {
-                    result = num1 / num2;
-                    System.out.println("Результат: " + result);
-                } else {
-                    System.out.println("Ошибка: деление на ноль невозможно.");
-                }
-                break;
-            default:
-                System.out.println("Ошибка: неизвестный оператор. ");
+
+            System.out.print("Введите оператор (+, -, *, /): ");
+            input = scanner.nextLine();
+            if (input.equalsIgnoreCase("выход")) break;
+            if (input.length() != 1 || "+-*/".indexOf(input.charAt(0)) == -1) {
+                System.out.println("Ошибка: неверный оператор.");
+                continue;
+            }
+            operator = input.charAt(0);
+
+
+            System.out.print("Введите второе число: ");
+            input = scanner.nextLine();
+            if (input.equalsIgnoreCase("выход")) break;
+            try {
+                num2 = Double.parseDouble(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите корректное число.");
+                continue;
+            }
+
+
+            switch (operator) {
+                case '+':
+                    System.out.println("Результат: " + (num1 + num2));
+                    break;
+                case '-':
+                    System.out.println("Результат: " + (num1 - num2));
+                    break;
+                case '*':
+                    System.out.println("Результат: " + (num1 * num2));
+                    break;
+                case '/':
+                    if (num2 == 0) {
+                        System.out.println("Ошибка: деление на ноль.");
+                    } else {
+                        System.out.println("Результат: " + (num1 / num2));
+                    }
+                    break;
+            }
+
+            System.out.println();
         }
 
+        System.out.println("Программа завершена.");
         scanner.close();
     }
 }
