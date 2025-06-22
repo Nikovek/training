@@ -5,7 +5,7 @@ public class Rectangle {
     public double height;
 
     public void area() {
-        double square = width*height;
+        double square = width * height;
         System.out.println("Площадь прямоугольника: " + square);
     }
 }
